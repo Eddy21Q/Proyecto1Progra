@@ -20,16 +20,14 @@ public class Modelo {
     private String dbPassword = "123";
 
     public boolean authenticateUser(String username, String password) {
-        try {
-            Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
-            String sql = "SELECT * FROM autenticacionusuarios WHERE Usuario = eddy.gonzalez AND Clave = 123";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
-            statement.setString(2, password);
-
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return true;
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword)) {
+            String sql = "SELECT * FROM autenticacionusuarios WHERE Usuario = ? AND Clave = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+                statement.setString(2, password);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    return resultSet.next();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

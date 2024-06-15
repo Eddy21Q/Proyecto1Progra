@@ -23,28 +23,22 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Panel principal con layout GridLayout para dividir en dos secciones
         JPanel mainPanel = new JPanel(new GridLayout(1, 2));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // Panel izquierdo (imagen)
         JPanel leftPanel = new JPanel(new BorderLayout());
-        leftPanel.setBackground(new Color(0, 123, 255)); // Color de fondo azul
+        leftPanel.setBackground(new Color(0, 123, 255));
         leftPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // Crear el panel de imagen adaptada
         JLabel imageLabel = new JLabel();
         ImageIcon originalIcon = new ImageIcon("VistaGUI\\Images\\image.png");
         Image image = originalIcon.getImage();
-        Image scaledImage = image.getScaledInstance(10, 10, Image.SCALE_SMOOTH); // Inicialmente no se escala
+        Image scaledImage = image.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         imageLabel.setIcon(scaledIcon);
-
-        // Añadir la imagen al panel izquierdo
         leftPanel.add(imageLabel, BorderLayout.CENTER);
         mainPanel.add(leftPanel);
 
-        // Panel derecho (formulario de inicio de sesión)
         JPanel rightPanel = new JPanel();
         rightPanel.setBackground(Color.WHITE);
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
@@ -97,7 +91,6 @@ public class GUI extends JFrame {
 
         add(mainPanel);
 
-        // Adaptar el tamaño de la imagen al panel izquierdo
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 int width = leftPanel.getWidth();
