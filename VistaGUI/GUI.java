@@ -4,7 +4,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import Modelo.Modelo;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -17,7 +20,7 @@ public class GUI extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
 
-    public GUI() {
+    public GUI(Modelo modelo) {
         setTitle("Veterinaria CR");
         setSize(700, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +36,7 @@ public class GUI extends JFrame {
         JLabel imageLabel = new JLabel();
         ImageIcon originalIcon = new ImageIcon("VistaGUI\\Images\\image.png");
         Image image = originalIcon.getImage();
-        Image scaledImage = image.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+        Image scaledImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         imageLabel.setIcon(scaledIcon);
         leftPanel.add(imageLabel, BorderLayout.CENTER);
@@ -99,6 +102,21 @@ public class GUI extends JFrame {
                 imageLabel.setIcon(new ImageIcon(newScaledImage));
             }
         });
+
+        // Agregar el listener al botón de iniciar sesión
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = getUsername();
+                String password = getPassword();
+
+                if (modelo.authenticateUser(username, password)) {
+                    showMessage("Inicio de sesión exitoso");
+                } else {
+                    showMessage("Error en el inicio de sesión");
+                }
+            }
+        });
     }
 
     public String getUsername() {
@@ -118,8 +136,9 @@ public class GUI extends JFrame {
     }
 
     public static void main(String[] args) {
+        Modelo modelo = new Modelo();
         SwingUtilities.invokeLater(() -> {
-            GUI gui = new GUI();
+            GUI gui = new GUI(modelo);
             gui.setVisible(true);
         });
     }
