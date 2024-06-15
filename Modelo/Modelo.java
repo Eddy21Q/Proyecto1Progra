@@ -12,36 +12,77 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Modelo {
-    private String jdbcUrl = "jdbc:mysql://localhost:3306//proyecto1progra";
-    private String dbUser = "root";
-    private String dbPassword = "josueProgramacion2";
+    // URL de la base de datos
+
+    private static final String url = "jdbc:mysql://localhost:3306/proyecto1progra";
+    // Usuario y contraseña de la base de datos
+    private static final String dbUser = "root";
+    private static final String dbPassword = "josueProgramacion2"; // Reemplaza con la contraseña real
 
     public boolean authenticateUser(String username, String password) {
-        System.out.println("Inicio de authenticateUser");
-        System.out.println("Conectando a la base de datos con URL: " + jdbcUrl);
-        System.out.println("Usuario de la base de datos: " + dbUser);
 
+        Connection connection = null;
         try {
-            Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
-            System.out.println("Conexión exitosa");
+            // Registrar el driver JDBC de MySQL
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String sql = "SELECT * FROM autenticacionusuarios WHERE Usuario = ? AND Clave = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
+            // Conectar a la base de datos
+            connection = DriverManager.getConnection(url, dbUser, dbPassword);
+
+            // Consulta SQL para autenticar al usuario
+            String query = "SELECT * FROM autenticacionusuarios WHERE Usuario = ? AND Clave = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
             statement.setString(2, password);
 
-            System.out.println("Ejecutando consulta: " + sql);
-            System.out.println("Parámetros: " + username + ", " + password);
-
             ResultSet resultSet = statement.executeQuery();
-            boolean result = resultSet.next();
-            System.out.println("Resultado de la consulta: " + result);
-            return result;
-        } catch (Exception e) {
+
+            // Si se encuentra el usuario, la autenticación es exitosa
+            return resultSet.next();
+        } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Cerrar la conexión si fue establecida
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return false;
+    }
+
+    public void savePetData(String nombre, int edad, double peso, String color, boolean esterilizado) {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, dbUser, dbPassword);
+            String query = "INSERT INTO tablamascotas (Nombre, edad, Peso, ColorPelo, Esterilizado) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, nombre);
+            statement.setInt(2, edad);
+            statement.setDouble(3, peso);
+            statement.setString(4, color);
+            statement.setBoolean(5, esterilizado);
+            statement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
