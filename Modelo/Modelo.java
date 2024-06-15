@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Modelo {
-    private String jdbcUrl = "jdbc:mysql://localhost:3306/proyecto1progra";
+    private String jdbcUrl = "jdbc:mysql://localhost:3306//proyecto1progra";
     private String dbUser = "root";
     private String dbPassword = "josueProgramacion2";
 

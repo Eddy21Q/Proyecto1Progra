@@ -9,9 +9,9 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "name": "MySQLconexion",
-            "username": "root",
-            "database": "proyecto1progra"
+            "name": "Conexion",
+            "database": "proyecto1progra",
+            "username": "root"
         }
     ]
 }
