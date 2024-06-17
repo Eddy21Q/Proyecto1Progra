@@ -13,6 +13,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Modelo {
     // URL de la base de datos
@@ -84,5 +87,97 @@ public class Modelo {
                 }
             }
         }
+    }
+
+    public void actualizarDatosMascota(String nombreActual, String nuevoNombre, int nuevaEdad, double nuevoPeso, String nuevoColor, boolean nuevoEsterilizado) {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, dbUser, dbPassword);
+            String query = "UPDATE tablamascotas SET Nombre = ?, edad = ?, Peso = ?, ColorPelo = ?, Esterilizado = ? WHERE Nombre = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, nuevoNombre);
+            statement.setInt(2, nuevaEdad);
+            statement.setDouble(3, nuevoPeso);
+            statement.setString(4, nuevoColor);
+            statement.setBoolean(5, nuevoEsterilizado);
+            statement.setString(6, nombreActual);
+            int filasActualizadas = statement.executeUpdate();
+            if (filasActualizadas > 0) {
+                System.out.println("Registro actualizado exitosamente.");
+            } else {
+                System.out.println("No se encontró un registro con el nombre proporcionado.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void eliminarDatosMascota(String nombre) {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, dbUser, dbPassword);
+            String query = "DELETE FROM tablamascotas WHERE Nombre = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, nombre);
+            int filasEliminadas = statement.executeUpdate();
+            if (filasEliminadas > 0) {
+                System.out.println("Registro eliminado exitosamente.");
+            } else {
+                System.out.println("No se encontró un registro con el nombre proporcionado.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public List<String[]> obtenerRegistrosMascotas() {
+        List<String[]> mascotas = new ArrayList<>();
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, dbUser, dbPassword);
+            String query = "SELECT * FROM tablamascotas";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                String nombre = resultSet.getString("Nombre");
+                int edad = resultSet.getInt("edad");
+                double peso = resultSet.getDouble("Peso");
+                String colorPelo = resultSet.getString("ColorPelo");
+                boolean esterilizado = resultSet.getBoolean("Esterilizado");
+                String esterilizadoStr = esterilizado ? "Sí" : "No";
+                mascotas.add(new String[]{nombre, String.valueOf(edad), String.valueOf(peso), colorPelo, esterilizadoStr});
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return mascotas;
     }
 }
