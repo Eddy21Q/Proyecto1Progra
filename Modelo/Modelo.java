@@ -15,7 +15,7 @@ public class Modelo {
     private static final String url = "jdbc:mysql://localhost:3306/proyecto1progra";// URL de la base de datos
     // Usuario y contraseña de la base de datos
     private static final String dbUser = "root";
-    private static final String dbPassword = "josueProgramacion2"; 
+    private static final String dbPassword = "1234"; 
 
     public boolean authenticateUser(String username, String password) {
 
@@ -26,7 +26,7 @@ public class Modelo {
           
             connection = DriverManager.getConnection(url, dbUser, dbPassword);  // Conectarse a la base de datos
          
-            String query = "SELECT * FROM autenticacionusuarios WHERE Usuario = ? AND Clave = ?";   //autenticacion del usuario
+            String query = "SELECT * FROM autenticacionusuarios WHERE usuario = ? AND clave = ?";   //autenticacion del usuario
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
             statement.setString(2, password);
@@ -57,7 +57,7 @@ public class Modelo {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, dbUser, dbPassword);
-            String query = "INSERT INTO tablamascotas (Nombre, edad, Peso, ColorPelo, Esterilizado) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO tablamascotas (nombre, edad, peso, ColorPelo, Esterilizado) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, nombre);
             statement.setInt(2, edad);
@@ -83,7 +83,7 @@ public class Modelo {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, dbUser, dbPassword);
-            String query = "UPDATE tablamascotas SET Nombre = ?, edad = ?, Peso = ?, ColorPelo = ?, Esterilizado = ? WHERE Nombre = ?";
+            String query = "UPDATE tablamascotas SET nombre = ?, edad = ?, peso = ?, ColorPelo = ?, Esterilizado = ? WHERE nombre = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, nuevoNombre);
             statement.setInt(2, nuevaEdad);
