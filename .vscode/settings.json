@@ -8,19 +8,6 @@
             "previewLimit": 50,
             "server": "localhost",
             "port": 3306,
-            "driver": "MySQL",
-            "name": "Conexion",
-            "database": "proyecto1progra",
-            "username": "root"
-        },
-        {
-            "mysqlOptions": {
-                "authProtocol": "default",
-                "enableSsl": "Disabled"
-            },
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 3306,
             "driver": "MariaDB",
             "name": "conexionproyecto",
             "database": "proyecto1progra",
