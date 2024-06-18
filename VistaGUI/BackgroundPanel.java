@@ -3,7 +3,7 @@ package VistaGUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class BackgroundPanel extends JPanel {
+public class BackgroundPanel extends JPanel {//clase para insertar una imagen en el fondo del sistema
 
     private Image backgroundImage;
 

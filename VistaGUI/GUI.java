@@ -1,30 +1,24 @@
 package VistaGUI;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.EmptyBorder;   //Importaciones de la interfaz grafica y la clase controlador
 import javax.swing.border.LineBorder;
-
 import Controlador.Controlador;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- *
- * @autor josue
- */
 public class GUI extends JFrame {
 
-    private JTextField usernameField;
+    private JTextField usernameField; //Inicializacion de las variables de los botones, labels e imagenes
     private JPasswordField passwordField;
     private JButton loginButton;
     private JPanel contentPanel;
     private JLabel imageLabel;
     private Image image;
 
-    public GUI() {
-        setTitle("Veterinaria CR");
+    public GUI() {//constructor
+        setTitle("Veterinaria CR");     //componentes graficos de la ventana de loggin
         setSize(1200, 1900); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -35,7 +29,7 @@ public class GUI extends JFrame {
         JPanel loginPanel = createLoginPanel();
         contentPanel.add(loginPanel, "loginPanel");
 
-        addComponentListener(new java.awt.event.ComponentAdapter() {
+        addComponentListener(new java.awt.event.ComponentAdapter() {//metodo para darle forma a la ventana
             @Override
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 int width = loginPanel.getWidth();
@@ -46,7 +40,7 @@ public class GUI extends JFrame {
         });
     }
 
-    private JPanel createLoginPanel() {
+    private JPanel createLoginPanel() {//metodo para la creacion de los componentes graficos de la ventana de loggin
         JPanel mainPanel = new JPanel(new GridLayout(1, 2));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
@@ -59,7 +53,7 @@ public class GUI extends JFrame {
         image = originalIcon.getImage();
         Image scaledImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        imageLabel.setIcon(scaledIcon);
+        imageLabel.setIcon(scaledIcon);                    //iconos
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         leftPanel.add(imageLabel, BorderLayout.CENTER);
 
@@ -74,7 +68,7 @@ public class GUI extends JFrame {
         JPanel rightPanel = new JPanel();
         rightPanel.setBackground(Color.WHITE);
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBorder(new EmptyBorder(20, 40, 20, 40)); // Márgenes ajustados
+        rightPanel.setBorder(new EmptyBorder(20, 40, 20, 40)); // Márgenes 
 
         JLabel loginTitleLabel = new JLabel("Iniciar Sesión");
         loginTitleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
@@ -113,7 +107,7 @@ public class GUI extends JFrame {
         rightPanel.add(Box.createRigidArea(new Dimension(0, 30))); // Espacio debajo del campo de contraseña
 
         loginButton = new JButton("Iniciar Sesión");
-        loginButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        loginButton.setFont(new Font("Segoe UI", Font.BOLD, 18));// creacion de los Botones
         loginButton.setPreferredSize(new Dimension(200, 50));
         loginButton.setBackground(new Color(0, 123, 255));
         loginButton.setForeground(Color.WHITE);
@@ -127,7 +121,7 @@ public class GUI extends JFrame {
         return mainPanel;
     }
 
-    public void addLoginListener(ActionListener listener) {
+    public void addLoginListener(ActionListener listener) {//metoodo para boton de loggin
         loginButton.addActionListener(listener);
     }
 
@@ -139,11 +133,11 @@ public class GUI extends JFrame {
         return new String(passwordField.getPassword());
     }
 
-    public void showMessage(String message) {
+    public void showMessage(String message) {//metodo para advertencias de excepciones
         JOptionPane.showMessageDialog(this, message);
     }
 
-    public void mostrarPanel(JPanel panel) {
+    public void mostrarPanel(JPanel panel) {//metodo para abrir mostrar el panel
         contentPanel.add(panel, "newPanel");
         CardLayout cardLayout = (CardLayout) contentPanel.getLayout();
         cardLayout.show(contentPanel, "newPanel");

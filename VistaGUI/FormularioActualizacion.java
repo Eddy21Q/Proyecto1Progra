@@ -1,14 +1,15 @@
 package VistaGUI;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.EmptyBorder;  //Importaciones de la interfaz grafica y la clase controlador
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Controlador.Controlador;
+
 public class FormularioActualizacion extends JPanel{
+    //Creacion de las variables para los botones y textfields
 private JTextField nombreActualField;
     private JTextField nuevoNombreField;
     private JTextField edadField;
@@ -19,17 +20,17 @@ private JTextField nombreActualField;
     private JButton limpiarButton;
     private JButton salirButton;
 
-    public FormularioActualizacion(Controlador controlador) {
+    public FormularioActualizacion(Controlador controlador) {//Interfaz grafica del panel de actualizacion
         setLayout(new BorderLayout());
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        mainPanel.setBackground(new Color(102, 255, 102)); // Verde claro para el fondo principal
+        mainPanel.setBackground(new Color(102, 255, 102)); // color del fondo
 
         JLabel formTitleLabel = new JLabel("Actualizar Datos de Mascota");
         formTitleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        formTitleLabel.setForeground(new Color(255, 51, 51)); // Rojo para el título
+        formTitleLabel.setForeground(new Color(255, 51, 51)); // Color del título
         formTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(formTitleLabel);
 
@@ -38,16 +39,16 @@ private JTextField nombreActualField;
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
         formPanel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(0, 153, 0)), // Verde oscuro para el borde del panel
+                BorderFactory.createLineBorder(new Color(0, 153, 0)), // color del borde del panel
                 "Datos de Mascota",
                 TitledBorder.DEFAULT_JUSTIFICATION,
                 TitledBorder.DEFAULT_POSITION,
                 new Font("Arial", Font.BOLD, 16), // Fuente para el título del borde
                 new Color(0, 153, 0) // Color para el título del borde
         ));
-        formPanel.setBackground(new Color(102, 255, 255)); // Cian claro para el fondo del panel de formulario
+        formPanel.setBackground(new Color(102, 255, 255)); // color para fondo del panel de formulario
 
-        nombreActualField = createInputField("Nombre Actual:", formPanel);
+        nombreActualField = createInputField("Nombre Actual:", formPanel);//creacion de los espacios para ingresar los datos
         nuevoNombreField = createInputField("Nuevo Nombre:", formPanel);
         edadField = createInputField("Edad:", formPanel);
         pesoField = createInputField("Peso:", formPanel);
@@ -59,7 +60,7 @@ private JTextField nombreActualField;
         esterilizadoLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         esterilizadoLabel.setForeground(new Color(0, 153, 0));
         esterilizadoCheckBox = new JCheckBox();
-        esterilizadoCheckBox.setBackground(new Color(102, 255, 255)); // Match background color
+        esterilizadoCheckBox.setBackground(new Color(102, 255, 255)); 
         esterilizadoPanel.add(esterilizadoLabel, BorderLayout.WEST);
         esterilizadoPanel.add(esterilizadoCheckBox, BorderLayout.CENTER);
         formPanel.add(esterilizadoPanel);
@@ -79,7 +80,7 @@ private JTextField nombreActualField;
 
         add(mainPanel, BorderLayout.CENTER);
 
-        actualizarButton.addActionListener(new ActionListener() {
+        actualizarButton.addActionListener(new ActionListener() {//boton de actualizar los datos
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombreActual = nombreActualField.getText();
@@ -94,7 +95,7 @@ private JTextField nombreActualField;
             }
         });
 
-        limpiarButton.addActionListener(new ActionListener() {
+        limpiarButton.addActionListener(new ActionListener() {//boton para limipiar los espacios donde se ingresaron los datos
             @Override
             public void actionPerformed(ActionEvent e) {
                 nombreActualField.setText("");
@@ -106,7 +107,7 @@ private JTextField nombreActualField;
             }
         });
 
-        salirButton.addActionListener(new ActionListener() {
+        salirButton.addActionListener(new ActionListener() {//boton para regresar al menu
             @Override
             public void actionPerformed(ActionEvent e) {
                 controlador.abrirMenuPrincipal();
@@ -114,14 +115,14 @@ private JTextField nombreActualField;
         });
     }
 
-    private JTextField createInputField(String label, JPanel panel) {
+    private JTextField createInputField(String label, JPanel panel) {//Metodo para crear los espacios 
         JPanel fieldPanel = new JPanel(new BorderLayout(10, 10));
         fieldPanel.setOpaque(false);
         JLabel fieldLabel = new JLabel(label);
         fieldLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        fieldLabel.setForeground(new Color(0, 153, 0)); // Verde oscuro para las etiquetas
+        fieldLabel.setForeground(new Color(0, 153, 0)); // color para las etiquetas
         JTextField textField = new JTextField();
-        textField.setBorder(new LineBorder(new Color(0, 153, 0), 1, true)); // Verde oscuro para el borde del campo
+        textField.setBorder(new LineBorder(new Color(0, 153, 0), 1, true)); //colorpara el borde del campo
         fieldPanel.add(fieldLabel, BorderLayout.WEST);
         fieldPanel.add(textField, BorderLayout.CENTER);
         panel.add(fieldPanel);
@@ -129,10 +130,10 @@ private JTextField nombreActualField;
         return textField;
     }
 
-    private JButton createStyledButton(String text, JPanel panel) {
+    private JButton createStyledButton(String text, JPanel panel) {//metodo para la creacion de los botones
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 16));
-        button.setBackground(new Color(0, 123, 255)); // Azul para el fondo del botón
+        button.setBackground(new Color(0, 123, 255)); // color para el fondo del botón
         button.setForeground(Color.WHITE);
         button.setBorder(new LineBorder(new Color(0, 123, 255), 1, true));
         button.setAlignmentX(Component.CENTER_ALIGNMENT);

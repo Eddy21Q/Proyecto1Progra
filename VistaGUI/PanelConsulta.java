@@ -3,10 +3,8 @@ package VistaGUI;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.DefaultTableModel;     //Importaciones de los componentes de la interfaz grafica, arrays y la clase controlador
 import Controlador.Controlador;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +12,7 @@ import java.util.List;
 
 public class PanelConsulta extends JPanel {
 
-    public PanelConsulta(List<String[]> mascotas, Controlador controlador) {
+    public PanelConsulta(List<String[]> mascotas, Controlador controlador) {//constructor
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(20, 20, 20, 20));
         setBackground(new Color(102, 255, 102)); // Fondo azul claro
@@ -22,7 +20,7 @@ public class PanelConsulta extends JPanel {
         // Crear título
         JLabel titleLabel = new JLabel("Consulta de Registros");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        titleLabel.setForeground(new Color(34, 34, 34)); // Color de texto oscuro
+        titleLabel.setForeground(new Color(34, 34, 34)); // Color de texto 
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel titlePanel = new JPanel();
@@ -31,7 +29,7 @@ public class PanelConsulta extends JPanel {
 
         add(titlePanel, BorderLayout.NORTH);
 
-        String[] columnNames = {"Nombre", "Edad", "Peso", "Color de Pelo", "Esterilizado"};
+        String[] columnNames = {"Nombre", "Edad", "Peso", "Color de Pelo", "Esterilizado"}; //columnas de la tabla
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         for (String[] mascota : mascotas) {
@@ -56,20 +54,20 @@ public class PanelConsulta extends JPanel {
         JButton salirButton = createStyledButton("Salir");
         salirButton.addActionListener(e -> controlador.abrirMenuPrincipal());
 
-        buttonPanel.add(Box.createHorizontalGlue()); // Para centrar el botón
+        buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(salirButton);
         buttonPanel.add(Box.createHorizontalGlue()); // Para centrar el botón
 
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    private JButton createStyledButton(String text) {
+    private JButton createStyledButton(String text) {//Metodo para darle estilo a los botones
         JButton button = new JButton(text);
         button.setFont(new Font("Segoe UI", Font.BOLD, 16));
         button.setBackground(new Color(0, 123, 255)); // Azul para el fondo del botón
         button.setForeground(Color.WHITE);
         button.setBorder(new LineBorder(new Color(0, 123, 255), 1, true));
-        button.setFocusPainted(false); // Eliminar el borde de enfoque
+        button.setFocusPainted(false); 
         button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Cambiar cursor al pasar sobre el botón
         button.setMaximumSize(new Dimension(150, 40)); // Tamaño del botón
         button.setAlignmentX(Component.CENTER_ALIGNMENT);

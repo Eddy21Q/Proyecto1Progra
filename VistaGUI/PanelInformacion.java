@@ -1,14 +1,13 @@
 package VistaGUI;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
+import javax.swing.border.EmptyBorder;//importaciones de los componentes graficos y la clase controlador
 import Controlador.Controlador;
-
 import java.awt.*;
+
 public class PanelInformacion extends JPanel{
 
-    public PanelInformacion(Controlador controlador, String informacion) {
+    public PanelInformacion(Controlador controlador, String informacion) {//constructor
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(20, 20, 20, 20));
         setBackground(new Color(102, 255, 102)); // Fondo gris claro
@@ -16,17 +15,17 @@ public class PanelInformacion extends JPanel{
         // Crear título
         JLabel titleLabel = new JLabel("Información Importante");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
-        titleLabel.setForeground(new Color(34, 34, 34)); // Color de texto oscuro
+        titleLabel.setForeground(new Color(34, 34, 34)); // Color de texto 
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel, BorderLayout.NORTH);
 
         // Crear panel central con imagen y texto
         JPanel centerPanel = new JPanel(new BorderLayout());
-        centerPanel.setBackground(new Color(245, 245, 245)); // Fondo gris claro
+        centerPanel.setBackground(new Color(245, 245, 245)); // Color de Fondo gris
 
         // Añadir imagen
         JLabel imageLabel = new JLabel();
-        ImageIcon icon = new ImageIcon("VistaGUI/Images/adoption.png"); // Reemplaza con la ruta correcta
+        ImageIcon icon = new ImageIcon("VistaGUI/Images/adoption.png"); //ruta para la imagen
         Image img = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(img));
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -49,9 +48,9 @@ public class PanelInformacion extends JPanel{
 
         // Crear panel para el botón
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(245, 245, 245)); // Fondo gris claro
+        buttonPanel.setBackground(new Color(245, 245, 245)); // color del fondo
 
-        JButton salirButton = new JButton("Salir");
+        JButton salirButton = new JButton("Salir");//darle estilo al boton
         salirButton.setFont(new Font("Segoe UI", Font.BOLD, 16));
         salirButton.setBackground(new Color(0, 123, 255));
         salirButton.setForeground(Color.WHITE);

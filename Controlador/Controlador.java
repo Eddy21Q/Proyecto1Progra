@@ -1,9 +1,7 @@
 package Controlador;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
+import java.util.List;                  //importaciones para la interfaz grafica y los paquetes Vista y Modelo
 import VistaGUI.GUI;
 import VistaGUI.MenuPrincipal;
 import VistaGUI.FormularioActualizacion;
@@ -17,19 +15,19 @@ import Modelo.Modelo;
 
 public class Controlador {
 
-    private GUI vista;
+    private GUI vista;//iniciacion de variables tipo vista y modelo
     private Modelo modelo;
 
-    public Controlador(GUI vista, Modelo modelo) {
+    public Controlador(GUI vista, Modelo modelo) {//constructor
         this.vista = vista;
         this.modelo = modelo;
         this.vista.addLoginListener(new LoginListener());
     }
 
-    class LoginListener implements ActionListener {
+    class LoginListener implements ActionListener {  //clase que permite hacer el loggin en el sistema
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {//metodo para aprobar o no la entrada al sistema segun los datos ingresados
             String username = vista.getUsername();
             String password = vista.getPassword();
             if (modelo.authenticateUser(username, password)) {
@@ -41,7 +39,7 @@ public class Controlador {
         }
     }
 
-    public void abrirMenuPrincipal() {
+    public void abrirMenuPrincipal() { //Metodos que llaman a las interfazes graficas y las clases restantes
         MenuPrincipal menuPrincipal = new MenuPrincipal(this);
         
         vista.mostrarPanel(menuPrincipal);

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package VistaGUI;
 
 import java.awt.Color;
@@ -13,7 +9,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.JButton;   //Importaciones de los componentes de la interfaz grafica y el controlador
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,15 +22,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- *
- * @author josue
- */
-
-
  public class FormularioMascota extends JPanel {
 
-    private JTextField nombreField;
+    private JTextField nombreField;  //creacion de las variables de los botones y los espacios
     private JTextField edadField;
     private JTextField pesoField;
     private JTextField colorField;
@@ -43,17 +33,17 @@ import java.awt.event.ActionListener;
     private JButton limpiarButton;
     private JButton salirButton;
 
-    public FormularioMascota(Controlador controlador) {
+    public FormularioMascota(Controlador controlador) {//constructor
         setLayout(new BorderLayout());
-
+                                                       //creacion de los componentes de la interfaz grafica
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        mainPanel.setBackground(new Color(102, 255, 102)); // Verde claro para el fondo principal
+        mainPanel.setBackground(new Color(102, 255, 102)); // color del fondo principal
 
         JLabel formTitleLabel = new JLabel("Registro de Mascotas");
         formTitleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        formTitleLabel.setForeground(new Color(255, 51, 51)); // Rojo para el título
+        formTitleLabel.setForeground(new Color(255, 51, 51)); // color del título
         formTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(formTitleLabel);
 
@@ -62,14 +52,14 @@ import java.awt.event.ActionListener;
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
         formPanel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(0, 153, 0)), // Verde oscuro para el borde del panel
+                BorderFactory.createLineBorder(new Color(0, 153, 0)), // 
                 "Datos Generales",
                 TitledBorder.DEFAULT_JUSTIFICATION,
                 TitledBorder.DEFAULT_POSITION,
-                new Font("Arial", Font.BOLD, 16), // Fuente para el título del borde
+                new Font("Arial", Font.BOLD, 16), 
                 new Color(0, 153, 0) // Color para el título del borde
         ));
-        formPanel.setBackground(new Color(102, 255, 255)); // Cian claro para el fondo del panel de formulario
+        formPanel.setBackground(new Color(102, 255, 255)); 
 
         nombreField = createInputField("Nombre:", formPanel);
         edadField = createInputField("Edad:", formPanel);
@@ -82,14 +72,14 @@ import java.awt.event.ActionListener;
         esterilizadoLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         esterilizadoLabel.setForeground(new Color(0, 153, 0));
         esterilizadoCheckBox = new JCheckBox();
-        esterilizadoCheckBox.setBackground(new Color(102, 255, 255)); // Match background color
+        esterilizadoCheckBox.setBackground(new Color(102, 255, 255)); 
         esterilizadoPanel.add(esterilizadoLabel, BorderLayout.WEST);
         esterilizadoPanel.add(esterilizadoCheckBox, BorderLayout.CENTER);
         formPanel.add(esterilizadoPanel);
 
         formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel();  //creacion de los botones
         buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
@@ -102,7 +92,7 @@ import java.awt.event.ActionListener;
 
         add(mainPanel, BorderLayout.CENTER);
 
-        ingresarButton.addActionListener(new ActionListener() {
+        ingresarButton.addActionListener(new ActionListener() {//metodo para ingresar los datos de las mascotas
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombre = nombreField.getText();
@@ -116,7 +106,7 @@ import java.awt.event.ActionListener;
             }
         });
 
-        limpiarButton.addActionListener(new ActionListener() {
+        limpiarButton.addActionListener(new ActionListener() {//metodo para limpiar los espacios donde se ingresaron los datos
             @Override
             public void actionPerformed(ActionEvent e) {
                 nombreField.setText("");
@@ -127,7 +117,7 @@ import java.awt.event.ActionListener;
             }
         });
 
-        salirButton.addActionListener(new ActionListener() {
+        salirButton.addActionListener(new ActionListener() {//metodo del boton para regresar al menu
             @Override
             public void actionPerformed(ActionEvent e) {
                 controlador.abrirMenuPrincipal();
@@ -135,7 +125,7 @@ import java.awt.event.ActionListener;
         });
     }
 
-    private JTextField createInputField(String label, JPanel panel) {
+    private JTextField createInputField(String label, JPanel panel) {//metodo para la creacion de los espacios
         JPanel fieldPanel = new JPanel(new BorderLayout(10, 10));
         fieldPanel.setOpaque(false);
         JLabel fieldLabel = new JLabel(label);
@@ -150,7 +140,7 @@ import java.awt.event.ActionListener;
         return textField;
     }
 
-    private JButton createStyledButton(String text, JPanel panel) {
+    private JButton createStyledButton(String text, JPanel panel) {//metodo para darle estilo a los botones
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 16));
         button.setBackground(new Color(0, 123, 255)); // Azul para el fondo del botón

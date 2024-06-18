@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Modelo;
 
-/**
- *
- * @author josue
- */
-import java.sql.Connection;
+import java.sql.Connection;//Importaciones necesarias para conectar la base de datos
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,33 +11,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Modelo {
-    // URL de la base de datos
-
-    private static final String url = "jdbc:mysql://localhost:3306/proyecto1progra";
+    
+    private static final String url = "jdbc:mysql://localhost:3306/proyecto1progra";// URL de la base de datos
     // Usuario y contraseña de la base de datos
     private static final String dbUser = "root";
-    private static final String dbPassword = "josueProgramacion2"; // Reemplaza con la contraseña real
+    private static final String dbPassword = "josueProgramacion2"; 
 
     public boolean authenticateUser(String username, String password) {
 
         Connection connection = null;
         try {
-            // Registrar el driver JDBC de MySQL
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Conectar a la base de datos
-            connection = DriverManager.getConnection(url, dbUser, dbPassword);
-
-            // Consulta SQL para autenticar al usuario
-            String query = "SELECT * FROM autenticacionusuarios WHERE Usuario = ? AND Clave = ?";
+          
+            Class.forName("com.mysql.cj.jdbc.Driver");  // Registrar el driver JDBC de MySQL
+          
+            connection = DriverManager.getConnection(url, dbUser, dbPassword);  // Conectarse a la base de datos
+         
+            String query = "SELECT * FROM autenticacionusuarios WHERE Usuario = ? AND Clave = ?";   //autenticacion del usuario
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
             statement.setString(2, password);
 
             ResultSet resultSet = statement.executeQuery();
-
-            // Si se encuentra el usuario, la autenticación es exitosa
-            return resultSet.next();
+                //manejo de expeciones
+            return resultSet.next(); // Si se encuentra el usuario, la autenticacin es exitosa
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -63,7 +52,7 @@ public class Modelo {
         }
     }
 
-    public void savePetData(String nombre, int edad, double peso, String color, boolean esterilizado) {
+    public void savePetData(String nombre, int edad, double peso, String color, boolean esterilizado) {//metodo para Guardar los datos de una mascota ingresada
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -88,7 +77,7 @@ public class Modelo {
             }
         }
     }
-
+//metodo para actualizar los datos de una mascota
     public void actualizarDatosMascota(String nombreActual, String nuevoNombre, int nuevaEdad, double nuevoPeso, String nuevoColor, boolean nuevoEsterilizado) {
         Connection connection = null;
         try {
@@ -120,7 +109,7 @@ public class Modelo {
             }
         }
     }
-
+//metodo para eliminar los datos de una mascota 
     public void eliminarDatosMascota(String nombre) {
         Connection connection = null;
         try {
@@ -147,7 +136,7 @@ public class Modelo {
             }
         }
     }
-
+//metodo para obtener el registro actual de las mascotas que se encuentran en la base de datos
     public List<String[]> obtenerRegistrosMascotas() {
         List<String[]> mascotas = new ArrayList<>();
         Connection connection = null;

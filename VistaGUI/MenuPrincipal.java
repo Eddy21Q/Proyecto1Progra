@@ -1,28 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package VistaGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.*;                        //Importaciones de los componentes graficos, manejo de exepciones,imagenes y la clase controlador
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import Controlador.Controlador;
 
 public class MenuPrincipal extends JPanel {
 
-    private BufferedImage backgroundImage;
+    private BufferedImage backgroundImage;//variable para la imagen de fondo
 
     public MenuPrincipal(Controlador controlador) {
         try {
-            backgroundImage = ImageIO.read(new File("VistaGUI/Images/animalitos.jpg")); // Reemplaza con la ruta correcta
+            backgroundImage = ImageIO.read(new File("VistaGUI/Images/animalitos.jpg")); //ruta de la imagen de fondo
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,10 +34,10 @@ public class MenuPrincipal extends JPanel {
         menuLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(menuLabel, BorderLayout.NORTH);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(18, 1, 15, 5)); // Usar GridLayout con 8 filas y 1 columna y más espacio entre los botones
+        JPanel buttonPanel = new JPanel(new GridLayout(18, 1, 15, 5)); //
         buttonPanel.setOpaque(false);
 
-        // Añadir botones con estilo
+        // Añadir botones con estilo al panel que a su vez implementa su funcionalidad
         buttonPanel.add(createStyledButton("INSERTAR", "VistaGUI/Images/insert.png", e -> controlador.abrirFormularioMascota()));
         buttonPanel.add(createStyledButton("ACTUALIZAR", "VistaGUI/Images/update.png", e -> controlador.abrirFormularioActualizacion()));
         buttonPanel.add(createStyledButton("ELIMINAR", "VistaGUI/Images/delete.png", e -> controlador.abrirFormularioEliminacion()));
@@ -55,18 +51,18 @@ public class MenuPrincipal extends JPanel {
         add(centerPanel, BorderLayout.CENTER);
     }
 
-    private JButton createStyledButton(String text, String iconPath, ActionListener actionListener) {
+    private JButton createStyledButton(String text, String iconPath, ActionListener actionListener) {//metodo para el estilo de los botones 
         JButton button = new JButton(text);
         button.setLayout(new FlowLayout(FlowLayout.LEFT)); // Alinear contenido del botón a la izquierda
         button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         button.setBackground(new Color(255, 255, 255)); // Fondo blanco
-        button.setForeground(new Color(0, 123, 255)); // Texto azul
-        button.setFocusPainted(false); // Eliminar el borde de enfoque
+        button.setForeground(new Color(0, 123, 255)); 
+        button.setFocusPainted(false); 
         button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Cambiar cursor al pasar sobre el botón
         button.setPreferredSize(new Dimension(350, 40)); // Tamaño del botón
-        button.setAlignmentX(Component.LEFT_ALIGNMENT); // Alinear el botón a la izquierda
+        button.setAlignmentX(Component.LEFT_ALIGNMENT); 
 
-        // Añadir icono al botón y redimensionarlo
+        // Añadir icono al botón 
         if (iconPath != null) {
             ImageIcon originalIcon = new ImageIcon(iconPath);
             Image img = originalIcon.getImage();
@@ -81,7 +77,7 @@ public class MenuPrincipal extends JPanel {
             BorderFactory.createEmptyBorder(10, 20, 10, 20) // Espaciado interior
         ));
 
-        // Efecto hover
+        // Efecto hover del raton
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(new Color(0, 123, 255));
@@ -94,14 +90,13 @@ public class MenuPrincipal extends JPanel {
             }
         });
 
-        // Añadir ActionListener si no es nulo
         if (actionListener != null) {
             button.addActionListener(actionListener);
         }
 
         return button;
     }
-    private void salirDelSistema() {
+    private void salirDelSistema() {//metodo del boton de salir del sistema
         JOptionPane.showMessageDialog(this, "Has salido del sistema.");
         System.exit(0);
     }
